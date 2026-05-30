@@ -1,6 +1,12 @@
 import { API_BASE_URL } from '@/lib/api-config'
+import { validateData, apiResponseSchema } from '@/lib/validation'
 
 export async function request(path: string, options: RequestInit = {}) {
+  // Validate path
+  if (!path || typeof path !== 'string') {
+    throw new Error('Invalid path parameter')
+  }
+
   const headers = new Headers(options.headers || {})
   
   // Set default Content-Type to JSON if not specified
@@ -22,5 +28,10 @@ export async function request(path: string, options: RequestInit = {}) {
     throw new Error(errorMessage)
   }
   
-  return data
+  // Validate response data
+  try {
+    return validateData(apiResponseSchema, data)
+  } catch {
+    return data
+  }
 }
