@@ -3,6 +3,7 @@ import type { SidebarProps } from '@/components/ui/sidebar'
 
 import {
   SquareTerminal,
+  User,
 } from "lucide-vue-next"
 import NavMain from '@/components/NavMain.vue'
 
@@ -26,24 +27,10 @@ const data = {
       icon: SquareTerminal,
     },
     {
-      title: "Playground",
-      url: "/playground",
-      icon: SquareTerminal,
-      items: [
-        {
-          title: "History",
-          url: "/",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    }
+      title: "Users",
+      url: "/users",
+      icon: User,
+    },
   ],
 }
 </script>

@@ -53,7 +53,7 @@ const route = useRoute()
           </div>
         </header>
         <hr class="border-border" />
-        <component :is="Component" v-if="Component" :key="route.fullPath" />
+        <component :is="Component" v-if="Component" :key="route.fullPath" class="bg-gray-100" />
       </SidebarInset>
     </SidebarProvider>
   </RouterView>

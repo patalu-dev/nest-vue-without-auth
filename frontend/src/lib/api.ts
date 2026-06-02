@@ -1,5 +1,4 @@
 import { API_BASE_URL } from '@/lib/api-config'
-import { validateData, apiResponseSchema } from '@/lib/validation'
 
 export async function request(path: string, options: RequestInit = {}) {
   // Validate path
@@ -8,12 +7,12 @@ export async function request(path: string, options: RequestInit = {}) {
   }
 
   const headers = new Headers(options.headers || {})
-  
+
   // Set default Content-Type to JSON if not specified
   if (!headers.has('Content-Type') && !(options.body instanceof FormData)) {
     headers.set('Content-Type', 'application/json')
   }
-  
+
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
     headers
@@ -27,11 +26,6 @@ export async function request(path: string, options: RequestInit = {}) {
     const errorMessage = (typeof data === 'object' && data.message) ? data.message : 'Lỗi hệ thống'
     throw new Error(errorMessage)
   }
-  
-  // Validate response data
-  try {
-    return validateData(apiResponseSchema, data)
-  } catch {
-    return data
-  }
+
+  return data
 }
